@@ -34,13 +34,14 @@ BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
-ROMFS		:=	romfs
+#ROMFS		:=	romfs
 
 APP_TITLE	:=	AI Chat
 APP_AUTHOR	:=	Your Name
 APP_VERSION	:=	1.0.0
 
-ICON		:=	icon.jpg
+#ICON		:=	icon.jpg
+NO_ICON		:=	1
 
 #---------------------------------------------------------------------------------
 # options for code generation
