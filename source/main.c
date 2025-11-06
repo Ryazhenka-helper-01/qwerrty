@@ -50,13 +50,18 @@ int main(int argc, char* argv[])
     
     printf("\n\x1b[33mНажмите [+] для выхода\x1b[0m\n");
     
+    // Initialize pad
+    PadState pad;
+    padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+    padInitializeDefault(&pad);
+    
     // Main loop
     while (appletMainLoop())
     {
-        hidScanInput();
-        u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+        padUpdate(&pad);
+        u64 kDown = padGetButtonsDown(&pad);
         
-        if (kDown & KEY_PLUS)
+        if (kDown & HidNpadButton_Plus)
             break;
         
         consoleUpdate(NULL);
@@ -65,3 +70,4 @@ int main(int argc, char* argv[])
     consoleExit(NULL);
     return 0;
 }
+```](cascade:incomplete-link)
