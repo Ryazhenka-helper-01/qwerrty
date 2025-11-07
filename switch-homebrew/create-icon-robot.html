@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Создать иконку для Switch</title>
+</head>
+<body>
+    <h1>Генератор иконки для Nintendo Switch</h1>
+    <p>Нажмите кнопку, чтобы скачать icon.jpg</p>
+    <button onclick="createIcon()">Создать и скачать icon.jpg</button>
+    
+    <canvas id="canvas" width="256" height="256" style="display:none;"></canvas>
+
+    <script>
+        function createIcon() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Градиентный фон (как на сайте)
+            const gradient = ctx.createLinearGradient(0, 0, 256, 256);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 256, 256);
+            
+            // Добавляем эмодзи робота
+            ctx.font = 'bold 140px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🤖', 128, 128);
+            
+            // Конвертируем в JPEG и скачиваем
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'icon.jpg';
+                link.click();
+                URL.revokeObjectURL(url);
+                alert('icon.jpg скачан! Скопируйте его в папку C:\\website\\switch-homebrew\\');
+            }, 'image/jpeg', 0.95);
+        }
+    </script>
+</body>
+</html>
