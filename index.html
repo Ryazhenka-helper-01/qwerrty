@@ -375,6 +375,65 @@
             }
         }
         
+        /* FAQ стили */
+        .faq-section {
+            margin-top: 30px;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .faq-question {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            user-select: none;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .faq-question::after {
+            content: '▼';
+            font-size: 12px;
+            color: #667eea;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s;
+            padding: 0 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 15px 20px;
+        }
+        
         .footer {
             background: white;
             padding: 30px;
@@ -942,21 +1001,31 @@
         <div class="tab-content" id="tab-guides">
             <!-- Список гайдов -->
             <div class="guides-container" id="guidesList" style="max-width: 1200px; margin: 0 auto;">
-                <h2>📚 Все гайды</h2>
+                <h2> Все гайды</h2>
                 <p style="color: #666; margin-bottom: 30px;">Выберите интересующий вас раздел</p>
-                
-                <div class="guide-item" onclick="showGuideInTab('switch')">
-                    <h3>🎮 Установка на Nintendo Switch</h3>
-                    <p>Пошаговая инструкция по установке AI Chat на вашу консоль</p>
+              <div id="guidesList" class="guides-grid">
+                <div class="guide-card" onclick="showGuideInTab('setup')">
+                    <h3> Установка на Nintendo Switch</h3>
+                    <p>Подробная инструкция по установке AI чата на вашу консоль</p>
                 </div>
                 
-                <div class="guide-item" onclick="showGuideInTab('problems')">
-                    <h3>🔧 Решение проблем</h3>
-                    <p>Частые вопросы и решения возможных проблем</p>
+                <div class="guide-card" onclick="showGuideInTab('problems')">
+                    <h3> Решение проблем</h3>
+                    <p>Ответы на частые вопросы и решение типичных проблем</p>
                 </div>
                 
+                <div class="guide-card" onclick="showGuideInTab('faq')">
+                    <h3> Вопросы-Ответы (FAQ)</h3>
+                    <p>Общие вопросы и ответы об использовании Ryzha AI</p>
+                </div>
+                
+                <div class="guide-card" onclick="window.open('qa-system.html', '_blank')">
+                    <h3> Задать вопрос модератору</h3>
+                    <p>Не нашли ответ? Задайте свой вопрос и получите помощь</p>
+                </div>
+            </div>    
                 <div class="coming-soon" style="margin-top: 30px;">
-                    ✨ Новые гайды скоро появятся
+                    Новые гайды скоро появятся
                 </div>
             </div>
             
@@ -988,6 +1057,46 @@
                 
                 <div class="download-link">
                     <strong>Ссылка на скачивание прошивки:</strong> <a href="https://github.com/Dimasick-git/Ryzhenka/releases" target="_blank">GitHub Releases</a>
+                </div>
+                
+                <div class="faq-section">
+                    <h3>❓ Часто задаваемые вопросы</h3>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Какая прошивка нужна для работы?
+                        </div>
+                        <div class="faq-answer">
+                            Требуется кастомная прошивка Atmosphere (CFW). Убедитесь, что у вас установлена последняя версия Atmosphere и Homebrew Menu.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Нужен ли интернет для работы?
+                        </div>
+                        <div class="faq-answer">
+                            Да, для работы AI чата требуется подключение к интернету. Switch должен быть подключен к Wi-Fi.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Можно ли использовать без API ключа?
+                        </div>
+                        <div class="faq-answer">
+                            Да! API ключ уже встроен по умолчанию. Вам не нужно ничего настраивать дополнительно.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Приложение занимает много места?
+                        </div>
+                        <div class="faq-answer">
+                            Нет, файл .nro весит менее 1 МБ. Для работы не требуется дополнительное место на карте памяти.
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -1022,6 +1131,133 @@
                 
                 <h3>Другие проблемы</h3>
                 <p>Если ваша проблема не решена, обратитесь за помощью в наш Telegram канал или посетите GitHub репозиторий.</p>
+                
+                <div class="faq-section">
+                    <h3>❓ Часто задаваемые вопросы</h3>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Почему AI не отвечает на мои вопросы?
+                        </div>
+                        <div class="faq-answer">
+                            Проверьте подключение к интернету. Если интернет работает, попробуйте обновить страницу (F5). Также убедитесь, что API ключ действителен.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Браузер открывается, но страница не загружается
+                        </div>
+                        <div class="faq-answer">
+                            Это может быть проблема с DNS. Попробуйте изменить DNS в настройках Switch на 8.8.8.8 (Google DNS) или 1.1.1.1 (Cloudflare).
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Приложение зависает при запуске
+                        </div>
+                        <div class="faq-answer">
+                            Попробуйте перезагрузить Switch полностью (удерживайте кнопку питания 12 секунд). Также проверьте, что у вас последняя версия Atmosphere.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Можно ли изменить API ключ?
+                        </div>
+                        <div class="faq-answer">
+                            Да! Перейдите в раздел "Настройки" на сайте, введите новый API ключ и нажмите "Сохранить". Ключ сохранится в браузере Switch.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Ошибка "Failed to fetch" при отправке сообщения
+                        </div>
+                        <div class="faq-answer">
+                            Эта ошибка означает проблему с подключением к API. Проверьте: 1) Работает ли интернет на Switch, 2) Не блокирует ли DNS сервис ChatAnywhere, 3) Попробуйте другой API ключ.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Содержимое гайда: Вопросы-Ответы (FAQ) -->
+            <div class="guide-content" id="guide-faq-tab" style="max-width: 1200px; margin: 0 auto;">
+                <button class="back-button" onclick="showGuidesListInTab()">← Назад к гайдам</button>
+                <h2>❓ Вопросы-Ответы (FAQ)</h2>
+                <p style="color: #666; margin-bottom: 30px;">Здесь собраны ответы на самые популярные вопросы об использовании Ryzha AI</p>
+                
+                <div class="faq-section">
+                    <h3>📱 Общие вопросы</h3>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Что такое Ryzha AI?
+                        </div>
+                        <div class="faq-answer">
+                            Ryzha AI - это AI чат-ассистент для Nintendo Switch, работающий на базе GPT. Он позволяет общаться с искусственным интеллектом прямо с вашей консоли через homebrew приложение.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Это бесплатно?
+                        </div>
+                        <div class="faq-answer">
+                            Да! Ryzha AI полностью бесплатен. API ключ уже встроен в приложение, вам не нужно ничего оплачивать.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Безопасно ли это для моей консоли?
+                        </div>
+                        <div class="faq-answer">
+                            Да, приложение безопасно. Оно работает как обычное homebrew приложение и не модифицирует системные файлы. Однако помните, что использование CFW всегда несёт определённые риски.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-section">
+                    <h3>🎮 Технические вопросы</h3>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Какая прошивка нужна?
+                        </div>
+                        <div class="faq-answer">
+                            Требуется Nintendo Switch с кастомной прошивкой Atmosphere (CFW) и установленным Homebrew Menu.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Нужен ли интернет?
+                        </div>
+                        <div class="faq-answer">
+                            Да, для работы AI чата требуется стабильное подключение к интернету через Wi-Fi.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Сколько места занимает?
+                        </div>
+                        <div class="faq-answer">
+                            Файл .nro весит менее 1 МБ. Для работы не требуется дополнительное место на карте памяти.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            Можно ли использовать без API ключа?
+                        </div>
+                        <div class="faq-answer">
+                            Да! API ключ уже встроен по умолчанию. Вам не нужно ничего настраивать дополнительно.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -1188,10 +1424,15 @@
         
         // Показать список гайдов во вкладке Гайды
         function showGuidesListInTab() {
-            document.getElementById('guidesList').style.display = 'block';
+            document.getElementById('guidesList').style.display = 'grid';
             document.querySelectorAll('.guide-content').forEach(guide => {
                 guide.classList.remove('active');
             });
+        }
+        
+        // Переключение FAQ вопросов
+        function toggleFaq(element) {
+            element.classList.toggle('active');
         }
         
         // Загрузка релизов с GitHub
