@@ -36,6 +36,14 @@
             background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
         }
         
+        body.theme-green {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        body.theme-purple {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        }
+        
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -343,6 +351,16 @@
         
         .theme-option.ocean {
             background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            color: white;
+        }
+        
+        .theme-option.green {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .theme-option.purple {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
             color: white;
         }
         
@@ -1030,6 +1048,12 @@
                         </div>
                         <div class="theme-option ocean" onclick="changeTheme('ocean')">
                             <div>Океан</div>
+                        </div>
+                        <div class="theme-option green" onclick="changeTheme('green')">
+                            <div>Зелёная</div>
+                        </div>
+                        <div class="theme-option purple" onclick="changeTheme('purple')">
+                            <div>Пурпурная</div>
                         </div>
                     </div>
                 </div>
